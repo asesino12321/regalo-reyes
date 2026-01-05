@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Para ti ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            width: 95%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        input {
+            padding: 10px;
+            width: 80%;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 20px;
+            background: #ff6f91;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #ff4f70;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .dog {
+            font-size: 70px;
+            transition: transform 0.3s;
+        }
+        
+        .dog.happy {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .layout {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        
+        .board button {
+            display: block;
+            margin-bottom: 10px;
+            width: 50px;
+        }
+        
+        .textBox {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .message {
+            margin-top: 10px;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card" id="login">
+        <h2>🔒 Zona secreta</h2>
+        <p>Introduce la clave</p>
+        <input type="password" id="password" placeholder="Clave secreta">
+        <br>
+        <button onclick="checkPassword()">Entrar</button>
+    </div>
+
+    <div class="card hidden" id="content">
+        <h2>Hola, mi amor 🐶❤️</h2>
+
+        <div class="layout">
+            <div>
+                <div class="dog" id="dog">🐕</div>
+                <button onclick="feedDog()">Alimentar 🦴</button>
+                <p class="message" id="dogMessage"></p>
+            </div>
+
+            <div class="board">
+                <button onclick="openGift(0)">🎁</button>
+                <button onclick="openGift(1)">🎁</button>
+                <button onclick="openGift(2)">🎁</button>
+                <button onclick="openGift(3)">🎁</button>
+            </div>
+
+            <div class="textBox" id="textBox">
+                <i>Abre el primer regalo ❤️</i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const CLAVE = "21";
+
+        const textos = [
+            "Voy a contarte una anécdota de mi tío. De joven, como nosotros, era tímido y pasó su infancia buscando aceptación, soportando burlas y desprecios.",
+
+            "Tras varias rupturas amorosas se enamoró profundamente de una chica alemana. Sin conocerla del todo, estaba dispuesto a todo por ella. Su corazón latía con una intensidad que nunca había sentido.",
+
+            "El miedo, la inseguridad y la falta de experiencia hicieron que ese amor se debilitara. Ambos escapaban de lo que sentían, y el dolor se fue acumulando con el tiempo.",
+
+            "Con esto quiero decirte, gorda, que el amor no se acaba: se fortalece. El amor es libertad, compañía y comunicación. Y yo quiero cuidarlo contigo. Te quiero ❤️  \n\nPD: la mascota se llama Chica."
+        ];
+
+        let progreso = parseInt(localStorage.getItem("progreso")) || 0;
+
+        function checkPassword() {
+            const input = document.getElementById("password").value;
+            if (input === CLAVE) {
+                document.getElementById("login").classList.add("hidden");
+                document.getElementById("content").classList.remove("hidden");
+            } else {
+                alert("Esa no es la clave ❤️");
+            }
+        }
+
+        function openGift(index) {
+            if (index !== progreso) {
+                alert("Este regalo todavía no… ve en orden ❤️");
+                return;
+            }
+
+            document.getElementById("textBox").innerText = textos[index];
+            progreso++;
+            localStorage.setItem("progreso", progreso);
+        }
+
+        function feedDog() {
+            const dog = document.getElementById("dog");
+            const msg = document.getElementById("dogMessage");
+
+            dog.classList.add("happy");
+            msg.innerText = "Gracias por cuidarme hoy ❤️";
+
+            setTimeout(() => dog.classList.remove("happy"), 500);
+        }
+    </script>
+
+</body>
+
+</html>
