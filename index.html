@@ -17,10 +17,10 @@
         
         .card {
             background: white;
-            padding: 25px;
+            padding: 20px;
             border-radius: 20px;
             width: 95%;
-            max-width: 600px;
+            max-width: 700px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         
@@ -51,7 +51,8 @@
         }
         
         .dog {
-            font-size: 70px;
+            font-size: 80px;
+            margin: 10px 0;
             transition: transform 0.3s;
         }
         
@@ -59,26 +60,20 @@
             transform: scale(1.2) rotate(5deg);
         }
         
-        .layout {
-            display: flex;
-            gap: 15px;
-            align-items: flex-start;
-        }
-        
-        .board button {
-            display: block;
-            margin-bottom: 10px;
-            width: 50px;
-        }
-        
-        .textBox {
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        
         .message {
             margin-top: 10px;
             font-style: italic;
+        }
+        
+        .textBox {
+            max-height: 400px;
+            overflow-y: auto;
+            font-size: 12px;
+            /* letra más pequeña para que quepa */
+            line-height: 1.4;
+            margin-top: 10px;
+            white-space: pre-wrap;
+            /* respeta saltos de línea */
         }
     </style>
 </head>
@@ -96,40 +91,29 @@
     <div class="card hidden" id="content">
         <h2>Hola, mi amor 🐶❤️</h2>
 
-        <div class="layout">
-            <div>
-                <div class="dog" id="dog">🐕</div>
-                <button onclick="feedDog()">Alimentar 🦴</button>
-                <p class="message" id="dogMessage"></p>
-            </div>
+        <div class="dog" id="dog">🐕</div>
+        <button onclick="feedDog()">Alimentar al perrito 🦴</button>
+        <p class="message" id="dogMessage"></p>
 
-            <div class="board">
-                <button onclick="openGift(0)">🎁</button>
-                <button onclick="openGift(1)">🎁</button>
-                <button onclick="openGift(2)">🎁</button>
-                <button onclick="openGift(3)">🎁</button>
-            </div>
-
-            <div class="textBox" id="textBox">
-                <i>Abre el primer regalo ❤️</i>
-            </div>
+        <div class="textBox" id="textBox">
+            Voy a contarte una anecdota de mi tio,mi tio, un piltrafilla de mucho cuidado de joven como nosotros era un tanto timido se paso su infancia en la busqueda de la adaptacion social, incluyendo la aceptacion de burlas, desprecios..insultos.. llego hasta
+            un punto de su infancia o juventud que todo cambio gracias a los amigos que hizo, los cuales eran un poco malos, menos uno, tras novias y ropturas amorosas se enamoro fuertemente de una joven alemana, me decia mi tio que sin conocerla estaba
+            dispuesto a todo con ella, era estar cerca y su coraxzon latia exhaustivo con la unica necesidad de irse, o encararse, ambos sintieron lo mismo, pero ella habia salido de una ruptura, la inconciencia, la ignorancia y por supuesto la falta
+            de experiencia de mi tio hizo en el, que todos los miedos, inseguridades, preguntas, y por supuesto noches de pensamientos, una persona fria, vengativa, rencorosa hasta cierto punto, y sobre todo dejada, ese interes fue perdiendose poco a
+            poco, el me contaba que esa chica la cual era su novia, tampoco pasaba un momento facil, pero que hizo como el, escapar de ello, mi tio duro bastante tiempo con ella, pero no era lo mismo, cada dia habia peleas, mi tio, dejado como si mismo
+            ignoraba toda situacion y empezo a adquirir costumbres, culturas e ideas distintas a las noramles, empezo a pensar en el mismo, se convirtio durante un gran tiempo en un pesimista llorón,tras dias y meses de angustia supo y reconoció, que
+            dar el corazon a una persona, es lo mismo que ser un cerdo y entrar al matadero, concluyo que su corazon era para su madre, y sus hermanos, quienes mostraron lealtad, y cariño, finalmente lo dejo con ella, todo iba mal, y el ambiente cada
+            vez era mas oscuro, meses despues volvieron, meses despues lo dejaron, y alfinal de la conversacion mi tia entró con su hija en brazos a la habitacion, y dijo "manuel, sabes muy bien que la primera vez te dejo yo" mientras ella lo decia formaba
+            una expresion de anelo y felicidad en su cara. Con esto quiero decirte gorda, que el amor no se acaba,se fortalece, se mejora, y finalmente pasa a nuestras tumbas,el amor no es desconfianza, no son celos y por supuesto no es estar 24 horas
+            juuntos el amor es libertad, compañia, bien estar, y sobre todo comunicacion estable, no en exceso, con este minirelato he querido reflejar como gente tan parecida a nosotros ha tenido un final feliz. y mira que mi tio es complicado JAJAJAJ,
+            no puedo decirte mucho mas de lo que todos los dias intento decirte, sobre inseguridades y no quieroe stropear la amgia de la carta, solo quiero decirte que me hace feliz e ilusion volver a estar contigo, siento el trozo de mi lleno, y aunque
+            sea dificil de llevar, a veces aspero o amargo con cariños o un gran pasota, es culpa de mi tio, he salido como el JAJAJAJ es broma, te quiero gorda PD: alimenta a la mascota,(Se llama chica)
         </div>
+
     </div>
 
     <script>
         const CLAVE = "21";
-
-        const textos = [
-            "Voy a contarte una anécdota de mi tío. De joven, como nosotros, era tímido y pasó su infancia buscando aceptación, soportando burlas y desprecios.",
-
-            "Tras varias rupturas amorosas se enamoró profundamente de una chica alemana. Sin conocerla del todo, estaba dispuesto a todo por ella. Su corazón latía con una intensidad que nunca había sentido.",
-
-            "El miedo, la inseguridad y la falta de experiencia hicieron que ese amor se debilitara. Ambos escapaban de lo que sentían, y el dolor se fue acumulando con el tiempo.",
-
-            "Con esto quiero decirte, gorda, que el amor no se acaba: se fortalece. El amor es libertad, compañía y comunicación. Y yo quiero cuidarlo contigo. Te quiero ❤️  \n\nPD: la mascota se llama Chica."
-        ];
-
-        let progreso = parseInt(localStorage.getItem("progreso")) || 0;
 
         function checkPassword() {
             const input = document.getElementById("password").value;
@@ -141,17 +125,6 @@
             }
         }
 
-        function openGift(index) {
-            if (index !== progreso) {
-                alert("Este regalo todavía no… ve en orden ❤️");
-                return;
-            }
-
-            document.getElementById("textBox").innerText = textos[index];
-            progreso++;
-            localStorage.setItem("progreso", progreso);
-        }
-
         function feedDog() {
             const dog = document.getElementById("dog");
             const msg = document.getElementById("dogMessage");
@@ -160,6 +133,15 @@
             msg.innerText = "Gracias por cuidarme hoy ❤️";
 
             setTimeout(() => dog.classList.remove("happy"), 500);
+
+            localStorage.setItem("fed", "yes");
+        }
+
+        if (localStorage.getItem("fed")) {
+            document.addEventListener("DOMContentLoaded", () => {
+                document.getElementById("dogMessage").innerText =
+                    "Ya me cuidaste hoy… sabía que volverías 🥹";
+            });
         }
     </script>
 
