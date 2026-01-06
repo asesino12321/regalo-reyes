@@ -138,7 +138,6 @@
             font-style: italic;
             text-align: center;
         }
-        /* --- Estrellitas --- */
         
         .star {
             position: absolute;
@@ -190,6 +189,7 @@
                 <button onclick="openGift(1)">🎁</button>
                 <button onclick="openGift(2)">🎁</button>
                 <button onclick="openGift(3)">🎁</button>
+                <button onclick="resetGame()">♻️</button>
             </div>
 
             <div class="textBox" id="textBox"><i>Abre el primer regalo ❤️</i></div>
@@ -199,7 +199,6 @@
     <script>
         const CLAVE = "21";
 
-        // Texto completo
         const textos = [
             `Voy a contarte una anecdota de mi tio,mi tio, un piltrafilla de mucho cuidado de joven como nosotros era un tanto timido
 se paso su infancia en la busqueda de la adaptacion social, incluyendo la aceptacion de burlas, desprecios..insultos.. llego hasta un punto 
@@ -221,8 +220,12 @@ que me hace feliz e ilusion volver a estar contigo, siento el trozo de mi lleno,
 JAJAJAJ es broma, te quiero gorda    PD: alimenta a la mascota,(Se llama chica)`
         ];
 
-        let progreso = parseInt(localStorage.getItem("progreso")) || 0;
-        let vida = parseInt(localStorage.getItem("vida")) || 50;
+        let progreso = parseInt(localStorage.getItem("progreso"));
+        if (isNaN(progreso)) progreso = 0;
+
+        let vida = parseInt(localStorage.getItem("vida"));
+        if (isNaN(vida)) vida = 50;
+
         let lastFeed = localStorage.getItem("lastFeed") || null;
 
         const dog = document.getElementById("dog");
@@ -230,17 +233,15 @@ JAJAJAJ es broma, te quiero gorda    PD: alimenta a la mascota,(Se llama chica)`
         const msg = document.getElementById("dogMessage");
         const textBox = document.getElementById("textBox");
 
-        // --- Inicializar vida
         fill.style.width = vida + "%";
 
-        // --- Control de días
+        // --- Revisa si pasó un día
         function checkDay() {
             if (!lastFeed) return;
             const last = new Date(lastFeed);
             const now = new Date();
-            const diff = (now - last) / 1000 / 60 / 60; // horas
+            const diff = (now - last) / 1000 / 60 / 60;
             if (diff >= 24) {
-                // Perro se va
                 dog.style.opacity = 0;
                 fill.style.width = 0;
                 msg.innerText = "Chica se fue… cuídala mejor la próxima vez ❤️";
@@ -278,7 +279,7 @@ JAJAJAJ es broma, te quiero gorda    PD: alimenta a la mascota,(Se llama chica)`
             const now = new Date();
             if (lastFeed) {
                 const last = new Date(lastFeed);
-                const diff = (now - last) / 1000 / 60 / 60; // horas
+                const diff = (now - last) / 1000 / 60 / 60;
                 if (diff < 24) {
                     alert("Ya la alimentaste hoy ❤️");
                     return;
@@ -317,8 +318,20 @@ JAJAJAJ es broma, te quiero gorda    PD: alimenta a la mascota,(Se llama chica)`
             }
         }
 
-        // --- Actualización periódica para el día
-        setInterval(checkDay, 60000); // revisa cada minuto
+        // --- Botón reset
+        function resetGame() {
+            localStorage.clear();
+            progreso = 0;
+            vida = 50;
+            fill.style.width = vida + "%";
+            textBox.innerHTML = "<i>Abre el primer regalo ❤️</i>";
+            dog.style.opacity = 1;
+            msg.innerText = "";
+            lastFeed = null;
+            alert("Juego reiniciado 😎");
+        }
+
+        setInterval(checkDay, 60000);
     </script>
 </body>
 
