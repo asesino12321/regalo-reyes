@@ -31,14 +31,6 @@
             position: relative;
         }
         
-        input {
-            padding: 10px;
-            width: 80%;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            margin-bottom: 15px;
-        }
-        
         button {
             padding: 8px 14px;
             border: none;
@@ -52,10 +44,6 @@
         
         button:hover {
             background: #ff4f70;
-        }
-        
-        .hidden {
-            display: none;
         }
         
         .layout {
@@ -109,17 +97,6 @@
             transition: transform 0.2s;
         }
         
-        .board {
-            flex: 0 0 60px;
-            text-align: center;
-        }
-        
-        .board button {
-            display: block;
-            margin-bottom: 10px;
-            width: 50px;
-        }
-        
         .textBox {
             flex: 1;
             max-height: 400px;
@@ -163,15 +140,7 @@
 
     <div id="stars"></div>
 
-    <div class="card" id="login">
-        <h2>🔒 Zona secreta</h2>
-        <p>Introduce la clave</p>
-        <input type="password" id="password" placeholder="Clave secreta">
-        <br>
-        <button onclick="checkPassword()">Entrar</button>
-    </div>
-
-    <div class="card hidden" id="content">
+    <div class="card" id="content">
         <h2>Hola, mi amor 🐶❤️</h2>
 
         <div class="layout">
@@ -182,60 +151,38 @@
                 </div>
                 <div class="ball" id="ball">⚽</div>
                 <p class="message" id="dogMessage"></p>
+                <button onclick="feedDog()">Alimentar al perrito 🦴</button>
+                <button onclick="resetGame()">♻️ Reiniciar</button>
             </div>
 
-            <div class="board">
-                <button onclick="openGift(0)">🎁</button>
-                <button onclick="openGift(1)">🎁</button>
-                <button onclick="openGift(2)">🎁</button>
-                <button onclick="openGift(3)">🎁</button>
-                <button onclick="resetGame()">♻️</button>
+            <div class="textBox" id="textBox">
+                Voy a contarte una anecdota de mi tio,mi tio, un piltrafilla de mucho cuidado de joven como nosotros era un tanto timido se paso su infancia en la busqueda de la adaptacion social, incluyendo la aceptacion de burlas, desprecios..insultos.. llego hasta
+                un punto de su infancia o juventud que todo cambio gracias a los amigos que hizo, los cuales eran un poco malos, menos uno, tras novias y ropturas amorosas se enamoro fuertemente de una joven alemana, me decia mi tio que sin conocerla
+                estaba dispuesto a todo con ella, era estar cerca y su coraxzon latia exhaustivo con la unica necesidad de irse, o encararse, ambos sintieron lo mismo, pero ella habia salido de una ruptura, la inconciencia, la ignorancia y por supuesto
+                la falta de experiencia de mi tio hizo en el, que todos los miedos, inseguridades, preguntas, y por supuesto noches de pensamientos, una persona fria, vengativa, rencorosa hasta cierto punto, y sobre todo dejada, ese interes fue perdiendose
+                poco a poco, el me contaba que esa chica la cual era su novia, tampoco pasaba un momento facil, pero que hizo como el, escapar de ello, mi tio duro bastante tiempo con ella, pero no era lo mismo, cada dia habia peleas, mi tio, dejado como
+                si mismo ignoraba toda situacion y empezo a adquirir costumbres, culturas e ideas distintas a las noramles, empezo a pensar en el mismo, se convirtio durante un gran tiempo en un pesimista llorón,tras dias y meses de angustia supo y reconoció,
+                que dar el corazon a una persona, es lo mismo que ser un cerdo y entrar al matadero, concluyo que su corazon era para su madre, y sus hermanos, quienes mostraron lealtad, y cariño, finalmente lo dejo con ella, todo iba mal, y el ambiente
+                cada vez era mas oscuro, meses despues volvieron, meses despues lo dejaron, y alfinal de la conversacion mi tia entró con su hija en brazos a la habitacion, y dijo "manuel, sabes muy bien que la primera vez te dejo yo" mientras ella lo
+                decia formaba una expresion de anelo y felicidad en su cara. Con esto quiero decirte gorda, que el amor no se acaba,se fortalece, se mejora, y finalmente pasa a nuestras tumbas,el amor no es desconfianza, no son celos y por supuesto no
+                es estar 24 horas juuntos el amor es libertad, compañia, bien estar, y sobre todo comunicacion estable, no en exceso, con este minirelato he querido reflejar como gente tan parecida a nosotros ha tenido un final feliz. y mira que mi tio
+                es complicado JAJAJAJ, no puedo decirte mucho mas de lo que todos los dias intento decirte, sobre inseguridades y no quieroe stropear la amgia de la carta, solo quiero decirte que me hace feliz e ilusion volver a estar contigo, siento
+                el trozo de mi lleno, y aunque sea dificil de llevar, a veces aspero o amargo con cariños o un gran pasota, es culpa de mi tio, he salido como el JAJAJAJ es broma, te quiero gorda PD: alimenta a la mascota,(Se llama chica)
             </div>
-
-            <div class="textBox" id="textBox"><i>Abre el primer regalo ❤️</i></div>
         </div>
     </div>
 
     <script>
-        const CLAVE = "21";
-
-        const textos = [
-            `Voy a contarte una anecdota de mi tio,mi tio, un piltrafilla de mucho cuidado de joven como nosotros era un tanto timido
-se paso su infancia en la busqueda de la adaptacion social, incluyendo la aceptacion de burlas, desprecios..insultos.. llego hasta un punto 
-de su infancia o juventud que todo cambio gracias a los amigos que hizo, los cuales eran un poco malos, menos uno, tras novias y ropturas amorosas se enamoro fuertemente
-de una joven alemana, me decia mi tio que sin conocerla estaba dispuesto a todo con ella, era estar cerca y su coraxzon latia exhaustivo
-con la unica necesidad de irse, o encararse, ambos sintieron lo mismo, pero ella habia  salido de una ruptura, la inconciencia, la ignorancia y por supuesto
-la falta de experiencia de mi tio hizo en el, que todos los miedos, inseguridades, preguntas, y por supuesto
-noches de pensamientos, una persona fria, vengativa, rencorosa hasta cierto punto, y sobre todo dejada, ese interes fue perdiendose poco a poco, el me contaba que esa 
-chica la cual era su novia, tampoco pasaba un momento facil, pero que hizo como el, escapar de ello, mi tio duro bastante tiempo con ella,
-pero no era lo mismo, cada dia habia peleas, mi tio, dejado como si mismo ignoraba toda situacion y empezo a adquirir costumbres, culturas e ideas distintas a las noramles,
-empezo a pensar en el mismo, se convirtio durante un gran tiempo en un pesimista llorón,tras dias y meses de angustia supo y reconoció, que dar el corazon a una persona, es lo mismo
-que ser un cerdo y entrar al matadero, concluyo que su corazon era para su madre, y sus hermanos, quienes mostraron lealtad, y cariño, finalmente lo dejo con ella,
-todo iba mal, y el ambiente cada vez era mas oscuro, meses despues volvieron, meses despues lo dejaron, y alfinal de la conversacion mi tia entró con su hija en brazos a la habitacion, y dijo
-"manuel, sabes muy bien que la primera vez te dejo yo" mientras ella lo decia formaba una expresion de anelo y felicidad en su cara.
-Con esto quiero decirte gorda, que el amor no se acaba,se fortalece, se mejora, y finalmente pasa a nuestras tumbas,el amor no es desconfianza, no son celos y por supuesto no es estar 24 horas juuntos
-el amor es libertad, compañia, bien estar, y sobre todo comunicacion estable, no en exceso, con este minirelato he querido reflejar como gente tan parecida a nosotros ha tenido un final feliz.
-y mira que mi tio es complicado JAJAJAJ, no puedo decirte mucho mas de lo que todos los dias intento decirte, sobre inseguridades y no quieroe stropear la amgia de la carta, solo quiero decirte
-que me hace feliz e ilusion volver a estar contigo, siento el trozo de mi lleno, y aunque sea dificil de llevar, a veces aspero o amargo con cariños o un gran pasota, es culpa de mi tio, he salido como el
-JAJAJAJ es broma, te quiero gorda    PD: alimenta a la mascota,(Se llama chica)`
-        ];
-
-        let progreso = parseInt(localStorage.getItem("progreso"));
-        if (isNaN(progreso)) progreso = 0;
-
         let vida = parseInt(localStorage.getItem("vida"));
         if (isNaN(vida)) vida = 50;
-
         let lastFeed = localStorage.getItem("lastFeed") || null;
 
         const dog = document.getElementById("dog");
         const fill = document.getElementById("life");
         const msg = document.getElementById("dogMessage");
-        const textBox = document.getElementById("textBox");
 
         fill.style.width = vida + "%";
 
-        // --- Revisa si pasó un día
         function checkDay() {
             if (!lastFeed) return;
             const last = new Date(lastFeed);
@@ -248,29 +195,6 @@ JAJAJAJ es broma, te quiero gorda    PD: alimenta a la mascota,(Se llama chica)`
             }
         }
 
-        // --- Password
-        function checkPassword() {
-            const input = document.getElementById("password").value;
-            if (input === CLAVE) {
-                document.getElementById("login").classList.add("hidden");
-                document.getElementById("content").classList.remove("hidden");
-                initStars();
-                checkDay();
-            } else alert("Esa no es la clave ❤️");
-        }
-
-        // --- Abrir regalos
-        function openGift(index) {
-            if (index !== progreso) {
-                alert("Este regalo todavía no… ve en orden ❤️");
-                return;
-            }
-            textBox.innerText = textos[index];
-            progreso++;
-            localStorage.setItem("progreso", progreso);
-        }
-
-        // --- Alimentar perro
         function feedDog() {
             if (dog.style.opacity == 0) {
                 alert("Chica se fue… ya no puedes alimentarla 😢");
@@ -296,7 +220,6 @@ JAJAJAJ es broma, te quiero gorda    PD: alimenta a la mascota,(Se llama chica)`
             localStorage.setItem("lastFeed", lastFeed);
         }
 
-        // --- Pelotita movible
         const ball = document.getElementById("ball");
         ball.addEventListener("click", () => {
             dog.style.left = (Math.random() * 40 - 20) + "px";
@@ -304,7 +227,6 @@ JAJAJAJ es broma, te quiero gorda    PD: alimenta a la mascota,(Se llama chica)`
             setTimeout(() => ball.style.transform = "scale(1)", 200);
         });
 
-        // --- Estrellitas
         function initStars() {
             const starsContainer = document.getElementById("stars");
             for (let i = 0; i < 30; i++) {
@@ -318,21 +240,21 @@ JAJAJAJ es broma, te quiero gorda    PD: alimenta a la mascota,(Se llama chica)`
             }
         }
 
-        // --- Botón reset
         function resetGame() {
             localStorage.clear();
-            progreso = 0;
             vida = 50;
             fill.style.width = vida + "%";
-            textBox.innerHTML = "<i>Abre el primer regalo ❤️</i>";
+            lastFeed = null;
             dog.style.opacity = 1;
             msg.innerText = "";
-            lastFeed = null;
             alert("Juego reiniciado 😎");
         }
 
+        initStars();
+        checkDay();
         setInterval(checkDay, 60000);
     </script>
+
 </body>
 
 </html>
